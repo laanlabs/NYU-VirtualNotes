@@ -42,7 +42,7 @@ struct ARViewContainer: UIViewRepresentable {
         
         //add touch guesters to scene
         arView.setupGestures()
-        //arView.installGestures(.all, for: printerSceneAnchor.printerObj)
+        arView.installGestures(.all, for: printerSceneAnchor.printerObj as! HasCollision)
 
         
         

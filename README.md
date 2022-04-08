@@ -12,6 +12,7 @@ This project uses RealityKit and Reality Composer to make virtual notes for a pr
 - [Reality Composer Content](https://developer.apple.com/documentation/realitykit/creating_3d_content_with_reality_composer )
 - [Reality Composer Content and Swift](https://developer.apple.com/documentation/realitykit/creating_3d_content_with_reality_composer/loading_reality_composer_files_using_generated_code)
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/)
+- [Anchoring Reality Composer](https://developer.apple.com/documentation/realitykit/creating_3d_content_with_reality_composer/selecting_an_anchor_for_a_reality_composer_scene)
 
   
 
