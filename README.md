@@ -35,7 +35,11 @@ This project uses RealityKit and Reality Composer to make virtual notes for a pr
 
 ### Apple Sample Code
 - [Advanced - Underwater](https://developer.apple.com/documentation/realitykit/building_an_immersive_experience_with_realitykit)
-- https://www.raywenderlich.com/books/apple-augmented-reality-by-tutorials/v1.0/chapters/7-behaviors-triggers-actions
-- https://github.com/Reality-Dev/RealityKit-Text
 
 
+
+## Dev notes
+
+
+for becky
+edu.nyu.DM-GY-6133.VirtualNotes2
