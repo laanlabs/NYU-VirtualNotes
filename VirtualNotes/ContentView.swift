@@ -11,11 +11,49 @@ import ARKit
 
 
 struct ContentView : View {
+    
+    
+    @State private var showContentOverlay = false
+
+    
     var body: some View {
-        return ARViewContainer().edgesIgnoringSafeArea(.all)
+        
+        VStack{
+        
+        //Load the AR View
+        ARViewContainer().edgesIgnoringSafeArea(.all)
+                  .overlay(
+                    
+                    
+                    VStack {
+                    
+                        //show the view if toggel is on
+                        if showContentOverlay {
+                            
+                            ContentOverlay()
+                          
+                        }
+                    
+                        
+                        HStack{
+                        
+                            
+                            Button(!showContentOverlay ? "Show Popup" : "Hide Popup") {
+                                showContentOverlay.toggle()
+                            }
+                          
+                            
+                        }
+                    }
+                    
+                    ,alignment: .bottom)
+            
+        }
     }
 }
 
+
+//The AR View
 struct ARViewContainer: UIViewRepresentable {
     
     
@@ -85,6 +123,36 @@ struct ARViewContainer: UIViewRepresentable {
     
     
 }
+
+
+
+struct ContentOverlay: View {
+
+    var body: some View {
+
+        ZStack {
+        
+            RoundedRectangle(cornerRadius: 25, style: .continuous)
+                .fill(.white.opacity(0.8))
+            
+            VStack {
+                Text("Some Popup Text")
+                    .foregroundColor(.black)
+                    .font(.largeTitle)
+                    .padding()
+                Image(systemName: "folder")
+                    .foregroundColor(.gray)
+                    .padding()
+            
+            }
+        }
+        
+        
+        
+    }
+}
+
+
 
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
