@@ -38,7 +38,7 @@ struct ContentView : View {
                         HStack{
                         
                             
-                            Button(!showContentOverlay ? "Show Popup" : "Hide Popup") {
+                            Button(!showContentOverlay ? "Add New Notes" : "Close") {
                                 showContentOverlay.toggle()
                             }
                           
@@ -108,11 +108,20 @@ struct ARViewContainer: UIViewRepresentable {
         
         
         //if the touch is on the printer toggel sign off and on
-        if entity.name == "printerObj" {
+        if entity.name == "ball1Obj" {
             
             if let sign1Obj = self.printerSceneAnchor.sign1Obj {
                 
                 sign1Obj.isEnabled = (sign1Obj.isEnabled) ? false : true
+                
+            }
+            
+        }
+        if entity.name == "ball2Obj" {
+            
+            if let sign2Obj = self.printerSceneAnchor.sign2Obj {
+                
+                sign2Obj.isEnabled = (sign2Obj.isEnabled) ? false : true
                 
             }
             
@@ -127,6 +136,7 @@ struct ARViewContainer: UIViewRepresentable {
 
 
 struct ContentOverlay: View {
+    @State var notes: String = ""
 
     var body: some View {
 
@@ -136,10 +146,29 @@ struct ContentOverlay: View {
                 .fill(.white.opacity(0.8))
             
             VStack {
-                Text("Some Popup Text")
+                Text("New Notes")
                     .foregroundColor(.black)
                     .font(.largeTitle)
                     .padding()
+                TextField("Type your notes...", text: $notes)
+                Button(action: {
+                    // What to perform
+                    print($notes)
+                }) {
+                    // How the button looks like
+                    Text("Submit")
+                        .fontWeight(.bold)
+                            .font(.title)
+                            .padding()
+                            .background(Color.purple)
+                            .cornerRadius(40)
+                            .foregroundColor(.white)
+                            .padding(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 40)
+                                    .stroke(Color.purple, lineWidth: 5)
+                            )
+                }
                 Image(systemName: "folder")
                     .foregroundColor(.gray)
                     .padding()
