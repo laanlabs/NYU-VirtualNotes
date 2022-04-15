@@ -33,9 +33,11 @@ This project uses RealityKit and Reality Composer to make virtual notes for a pr
 - https://developer.apple.com/tutorials/swiftui
 
 
-### Apple Sample Code
+### Sample Code
 - [Advanced - Underwater](https://developer.apple.com/documentation/realitykit/building_an_immersive_experience_with_realitykit)
-
+- https://www.raywenderlich.com/books/apple-augmented-reality-by-tutorials/v1.0/chapters/7-behaviors-triggers-actions
+- https://github.com/Reality-Dev/RealityKit-Text
+- https://www.iosdevie.com/p/introduction-to-realitykit-on-ios?s=r
 
 
 ## Dev notes

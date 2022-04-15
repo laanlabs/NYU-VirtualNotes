@@ -10,45 +10,38 @@ import RealityKit
 import ARKit
 
 
+
 struct ContentView : View {
     
-    
     @State private var showContentOverlay = false
+
+
 
     
     var body: some View {
         
-        VStack{
         
-        //Load the AR View
-        ARViewContainer().edgesIgnoringSafeArea(.all)
-                  .overlay(
-                    
-                    
-                    VStack {
-                    
-                        //show the view if toggel is on
-                        if showContentOverlay {
-                            
-                            ContentOverlay()
-                          
-                        }
-                    
-                        
-                        HStack{
-                        
-                            
-                            Button(!showContentOverlay ? "Add New Notes" : "Close") {
-                                showContentOverlay.toggle()
-                            }
-                          
-                            
-                        }
-                    }
-                    
-                    ,alignment: .bottom)
+        ZStack {
+            
+            ARViewContainer().edgesIgnoringSafeArea(.all)
+            
+            UIOverlay(showContentOverlay: $showContentOverlay)
+
+            
+            if showContentOverlay {
+                
+                ContentOverlay(showContentOverlay: $showContentOverlay)
+
+              
+            }
+            
+            
+            
             
         }
+        
+        
+    
     }
 }
 
@@ -135,9 +128,42 @@ struct ARViewContainer: UIViewRepresentable {
 
 
 
+struct UIOverlay : View {
+
+    @Binding public var showContentOverlay: Bool
+    
+    
+    var body: some View {
+       
+        VStack {
+                
+                    //show the view if toggel is on
+                    //@todo - add segment controller
+                
+                    
+                    HStack{
+                    
+                        
+                        Button(!showContentOverlay ? "Add New Notes" : "Close") {
+                            showContentOverlay.toggle()
+                        }
+                      
+                        
+                    }
+                }
+    }
+    
+    
+}
+
+
+
 struct ContentOverlay: View {
     @State var notes: String = ""
 
+    @Binding public var showContentOverlay: Bool
+
+    
     var body: some View {
 
         ZStack {
@@ -172,6 +198,16 @@ struct ContentOverlay: View {
                 Image(systemName: "folder")
                     .foregroundColor(.gray)
                     .padding()
+                
+                Button( "Close") {
+                    showContentOverlay.toggle()
+
+                }
+                .background(Color.black)
+                .foregroundColor(.white)
+
+
+                
             
             }
         }
