@@ -14,6 +14,9 @@ import ARKit
 struct ContentView : View {
     
     @State private var showContentOverlay = false
+    @State private var showNotesMarkOverlay = false
+    @State private var showNotesOverlay = false
+    @State private var showContentMarkOverlay = true
 
 
 
@@ -24,17 +27,34 @@ struct ContentView : View {
         ZStack {
             
             ARViewContainer().edgesIgnoringSafeArea(.all)
-            
-            UIOverlay(showContentOverlay: $showContentOverlay)
-
-            
-            if showContentOverlay {
+            if showContentMarkOverlay {
                 
-                ContentOverlay(showContentOverlay: $showContentOverlay)
+                ContentMarkOverlay(showContentOverlay: $showContentOverlay, showContentMarkOverlay: $showContentMarkOverlay)
+                    .edgesIgnoringSafeArea(.all)
 
               
             }
-            
+            if showContentOverlay {
+                
+                ContentOverlay(showContentOverlay: $showContentOverlay)
+                    .edgesIgnoringSafeArea(.all)
+            }
+            if showNotesMarkOverlay {
+                
+                NotesMarkOverlay(showNotesMarkOverlay: $showNotesMarkOverlay,showNotesOverlay: $showNotesOverlay)
+                    .edgesIgnoringSafeArea(.all)
+
+              
+            }
+            if showNotesOverlay {
+                
+                NotesOverlay(showNotesOverlay: $showNotesOverlay)
+                    .edgesIgnoringSafeArea(.all)
+
+              
+            }
+            UIOverlay(showContentMarkOverlay: $showContentMarkOverlay, showContentOverlay: $showContentOverlay, showNotesMarkOverlay: $showNotesMarkOverlay,showNotesOverlay:$showNotesOverlay)
+                .edgesIgnoringSafeArea(.all)
             
             
             
@@ -129,8 +149,11 @@ struct ARViewContainer: UIViewRepresentable {
 
 
 struct UIOverlay : View {
-
+    
+    @Binding public var showContentMarkOverlay: Bool
     @Binding public var showContentOverlay: Bool
+    @Binding public var showNotesMarkOverlay: Bool
+    @Binding public var showNotesOverlay: Bool
     
     
     var body: some View {
@@ -142,21 +165,220 @@ struct UIOverlay : View {
                 
                     
                     HStack{
-                    
+                        Rectangle()
+                        .fill(Color.black.opacity(0.7))
+                        .cornerRadius(15)
+                        .frame(width: 50, height: 50)
+                        .overlay(
+                            Button(action:{
+                                showContentOverlay = false; showNotesOverlay = false
+                            }){
+                                Image(systemName: "xmark")
+                            }
+                                .font(.system(size:30))
+                                .foregroundColor(.white)
+                        )
                         
-                        Button(!showContentOverlay ? "Add New Notes" : "Close") {
-                            showContentOverlay.toggle()
-                        }
+                        Rectangle()
+                        .fill(Color.black.opacity(0.7))
+                        .cornerRadius(15)
+                        .frame(width: 220, height: 50)
+                        .overlay(
+                            
+                            HStack{
+                                Rectangle()
+                                    .fill(showContentMarkOverlay ? Color.black.opacity(0.7) : Color.black.opacity(0))
+                                .cornerRadius(15)
+                                .frame(width: 120, height: 40)
+                                .overlay(
+                                    Button(action:{
+                                        showContentMarkOverlay = true; showNotesMarkOverlay = false; showNotesOverlay = false
+                                    }){
+                                        Text("Instructions")
+                                            .padding(0)
+                                            .font(.system(size:20))
+                                            .foregroundColor(showContentMarkOverlay ? .purple : .white)
+                                            .frame(width: 120, height: 50)
+                                            .cornerRadius(15)
+                                            
+                                    }
+                                )
+                                
+                                Rectangle()
+                                .fill(showNotesMarkOverlay ? Color.black.opacity(0.7) : Color.black.opacity(0))
+                                .cornerRadius(15)
+                                .frame(width: 80, height: 40)
+                                .overlay(
+                                    Button(action:{
+                                        showNotesMarkOverlay = true; showContentMarkOverlay = false; showContentOverlay = false
+                                    }){
+                                        Text("Notes")
+                                            .padding(0)
+                                            .font(.system(size:20))
+                                            .foregroundColor(showNotesMarkOverlay ? .purple : .white)
+                                            .frame(width: 120, height: 50)
+                                            .cornerRadius(15)
+                                            
+                                    }
+                                )
+                                
+                                
+                                    
+                                
+                                
+                                    
+                            }
+                        )
+                        Circle()
+                        .fill(Color.black.opacity(0.7))
+                        .cornerRadius(15)
+                        .frame(width: 50, height: 50)
+                        .overlay(
+                            Button(action:{
+                                showContentOverlay.toggle()
+                            }){
+                                Image(systemName: "ellipsis")
+                            }
+                                .font(.system(size:30))
+                                .foregroundColor(.white)
+                        )
+                        
                       
                         
-                    }
-                }
+                    }.padding(.top, 80)
+                Spacer()
+        }.padding(.bottom, 20)
     }
     
     
 }
+struct NotesMarkOverlay: View {
+    @Binding public var showNotesMarkOverlay: Bool
+    @Binding public var showNotesOverlay: Bool
+
+    
+    var body: some View {
+            
+            VStack {
+                Spacer()
+                Circle()
+                    .fill(showNotesOverlay ? Color.purple : Color.white.opacity(0.7))
+                .frame(width: 70, height: 70)
+                .overlay(
+                    Button(action:{
+                        showNotesOverlay = true
+                    }){
+                        Image(systemName: "plus")
+                    }
+                        .font(.system(size:30))
+                        .foregroundColor(showNotesOverlay ? .white : .black)
+                ).padding(.bottom,50)
+               
+            }
+       
+        
+        
+        
+    }
+}
+
+struct ContentMarkOverlay: View {
+    @Binding public var showContentOverlay: Bool
+    @Binding public var showContentMarkOverlay: Bool
+
+    
+    var body: some View {
+            
+            VStack {
+                Circle()
+                    .strokeBorder(Color.white, lineWidth: 5)
+                    .background(Circle().fill(Color.purple))
+                    .frame(width:50, height:50)
+            
+                    .overlay(
+                        Button(action:{
+                            showContentOverlay.toggle()
+                        }
+                        ){
+                            Text("1")
+                                .bold()
+                                .foregroundColor(.white)
+                                
+                        }
+                    
+                    )
+            }
+       
+        
+        
+        
+    }
+}
+
+struct NotesOverlay: View {
+    @State var notes: String = ""
+
+    @Binding public var showNotesOverlay: Bool
+
+    
+    var body: some View {
+
+        ZStack {
+        
+            RoundedRectangle(cornerRadius: 0, style: .continuous)
+                .fill(.purple.opacity(0.85))
+            
+            VStack {
+                
+                TextField("**Lucas:** Enter a description", text: $notes)
+                    .padding(.horizontal, 60)
+                    .padding(.top, 0)
+                    .font(Font.system(size: 14))
+                    
+                    .background(RoundedRectangle(cornerRadius: 5)
+                        .fill(Color.white)
+                        .frame(width:280,height:150))
+                    .foregroundColor(.black)
+                    
+                   
+                Button(action: {
+                    // What to perform
+                    print($notes)
+                }) {
+                    // How the button looks like
+                    Rectangle()
+                        .fill(Color.white.opacity(0.9))
+                        .frame(maxWidth:120,maxHeight:40)
+                        .cornerRadius(3)
+                        .overlay(
+                            Text("Next Step")
+                                .foregroundColor(.black)
+                                .cornerRadius(3)
+                                
+                        )
+                        .padding()
+                        .padding(.top,60)
+                        
+                    
+                            
+                }
+                
+//                Image(systemName: "folder")
+//                    .foregroundColor(.gray)
+//                    .padding()
+                
+                
 
 
+                
+            
+            }
+        }
+        
+        
+        
+    }
+}
 
 struct ContentOverlay: View {
     @State var notes: String = ""
@@ -168,48 +390,53 @@ struct ContentOverlay: View {
 
         ZStack {
         
-            RoundedRectangle(cornerRadius: 25, style: .continuous)
-                .fill(.white.opacity(0.8))
+            RoundedRectangle(cornerRadius: 0, style: .continuous)
+                .fill(.purple.opacity(0.85))
             
+            Rectangle()
+                .fill(Color.white.opacity(0.9))
+                .cornerRadius(10)
+                .frame(maxWidth:250, maxHeight: 220)
+                .overlay(
+                    VStack{
+                        Text("Step 1")
+                            .font(.title2)
+                            .foregroundColor(Color.blue)
+                            .padding(.bottom, 5)
+                        Text("Once you have created or chosen a design,you must either export or download the STL file. The STL file is what stores the information about your conceptual 3D object.")
+                            .font(.system(size: 12))
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal,10)
+                            
+                        Divider()
+                        Text("Instructor Notes")
+                            .font(.title2)
+                            .foregroundColor(Color.blue)
+                            .padding(.bottom, 5)
+                        Text("Be sure your laptop connect with “Ultimaker 2+”")
+                            .font(.system(size: 12))
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal,10)
+                        
+                    }
+                )
             VStack {
-                Text("New Notes")
-                    .foregroundColor(.black)
-                    .font(.largeTitle)
-                    .padding()
-                TextField("Type your notes...", text: $notes)
-                Button(action: {
-                    // What to perform
-                    print($notes)
-                }) {
-                    // How the button looks like
-                    Text("Submit")
-                        .fontWeight(.bold)
-                            .font(.title)
-                            .padding()
-                            .background(Color.purple)
-                            .cornerRadius(40)
-                            .foregroundColor(.white)
-                            .padding(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 40)
-                                    .stroke(Color.purple, lineWidth: 5)
-                            )
-                }
-                Image(systemName: "folder")
-                    .foregroundColor(.gray)
-                    .padding()
-                
-                Button( "Close") {
-                    showContentOverlay.toggle()
-
-                }
-                .background(Color.black)
-                .foregroundColor(.white)
-
-
-                
+                Spacer()
+                Circle()
+                    .strokeBorder(Color.white, lineWidth: 5)
+                    .background(Circle().fill(Color.purple))
+                    .frame(width:50, height:50)
             
+                    .overlay(
+                        Text("1")
+                            .bold()
+                            .foregroundColor(.white)
+                        
+                    
+                    )
+                    .padding(.bottom,30)
             }
+            
         }
         
         
