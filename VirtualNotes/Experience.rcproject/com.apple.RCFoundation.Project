@@ -243,42 +243,26 @@
                   "246E562F-4186-482A-AC27-81CF278BE072" : null,
                   "632E476F-1E55-4E30-9723-1C51DD2E8B89" : null,
                   "779F95FA-F02C-4B14-A227-F41D1B99034A" : null,
-                  "9138FAEA-616E-4656-AFCA-05811E0B8DD6" : {
+                  "799FF62E-C5DC-4182-856F-ADF1A5F6A897" : {
                     "overrides" : {
                       "arguments" : [
                         [
-                          "item",
+                          "material",
                           {
                             "typeName" : "String",
-                            "value" : "One Ball"
+                            "value" : "standard"
                           }
                         ],
                         [
-                          "style",
+                          "type",
                           {
                             "typeName" : "String",
-                            "value" : "Stylized"
+                            "value" : "sphere"
                           }
                         ]
                       ],
-                      "children" : {
-                        "item" : {
-                          "overrides" : {
-                            "factory" : null,
-                            "runtimeAttributes" : [
-                              [
-                                "RuntimeIdentifier",
-                                {
-                                  "typeName" : "UUID",
-                                  "value" : "293E3EF4-835F-4EA1-8741-8BEACC1B0B63"
-                                }
-                              ]
-                            ]
-                          }
-                        }
-                      },
                       "factory" : {
-                        "identifier" : "com.apple.rc.af.OneBall.e530382b-8177-4434-98f3-9a45bf90ce9c",
+                        "identifier" : "com.apple.rc.af.CoreAssetFactories.PrimitiveShapeAssetFactory",
                         "version" : "1.0"
                       },
                       "runtimeAttributes" : [
@@ -286,28 +270,7 @@
                           "RuntimeIdentifier",
                           {
                             "typeName" : "UUID",
-                            "value" : "822C8B09-4BBD-4330-8769-9DB8507227F4"
-                          }
-                        ],
-                        [
-                          "entityName",
-                          {
-                            "typeName" : "String",
-                            "value" : "ball1Obj"
-                          }
-                        ],
-                        [
-                          "rigidBody-enabled",
-                          {
-                            "typeName" : "Bool",
-                            "value" : true
-                          }
-                        ],
-                        [
-                          "rigidBody-motionType",
-                          {
-                            "typeName" : "REMotionType",
-                            "value" : "static"
+                            "value" : "BDBDD8E9-CD95-48DC-B614-7F931ED6BEC6"
                           }
                         ]
                       ]
@@ -326,13 +289,14 @@
                         0,
                         1,
                         0,
-                        0.18743385374546051,
-                        0.29999992251396179,
-                        3.7252902984619141e-09,
+                        -0.085497930645942688,
+                        0.34999990463256836,
+                        0.09993356466293335,
                         1
                       ]
                     }
                   },
+                  "9138FAEA-616E-4656-AFCA-05811E0B8DD6" : null,
                   "A741E22A-F512-4ADD-95A5-E85EE45AA456" : null,
                   "ABB8ADC6-D1EC-4197-B387-82C228B73994" : null,
                   "B73C1F0A-DD77-4075-852C-96B7AE89FDF0" : null,
