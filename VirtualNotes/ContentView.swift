@@ -27,7 +27,7 @@ struct ContentView : View {
         ZStack {
             
             //pass the notes overlay var to arview
-            ARViewContainer(showContentOverlay: $showContentOverlay)
+            ARViewContainer(showContentOverlay: $showContentOverlay,showContentMarkOverlay: $showContentMarkOverlay)
                 .edgesIgnoringSafeArea(.all)
             if showContentMarkOverlay {
                 
@@ -73,6 +73,7 @@ struct ARViewContainer: UIViewRepresentable {
     
     
     @Binding public var showContentOverlay: Bool
+    @Binding public var showContentMarkOverlay: Bool
 
     
     
@@ -115,7 +116,17 @@ struct ARViewContainer: UIViewRepresentable {
 //
 //
 //        entity.setPosition(SIMD3<Float>(0, 3.5, 1), relativeTo: printer)
-        printerSceneAnchor.ball1Obj?.setParent(printer, preservingWorldTransform: true)
+        if showContentMarkOverlay {
+            
+           printerSceneAnchor.ball1Obj?.isEnabled = true
+            printerSceneAnchor.ball1Obj?.setParent(printer, preservingWorldTransform: true)
+             
+            }
+        if !showContentMarkOverlay{
+                printerSceneAnchor.ball1Obj?.isEnabled = false
+            
+        }
+        
 //        printerSceneAnchor.ball1Obj?.setPosition(SIMD3<Float>(0, 3.5, 1), relativeTo: printer)
         //add touch guesters to scene
         arView.setupGestures()
@@ -149,6 +160,7 @@ struct ARViewContainer: UIViewRepresentable {
         if entity.name == "ball1Obj" {
             showContentOverlay = true
             print(entity.name)
+            print(showContentMarkOverlay)
         }
         
     }

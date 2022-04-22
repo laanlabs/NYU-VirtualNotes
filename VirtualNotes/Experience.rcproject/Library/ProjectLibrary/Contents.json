@@ -18,5 +18,10 @@
     "libraryIdentifier" : "0c785970561e8cb48c830d6d4e26d46a",
     "format" : "model",
     "displayName" : "Fusion_01.usdz"
+  },
+  {
+    "libraryIdentifier" : "56b96bcf256f6c091bdba9053b994582",
+    "format" : "image",
+    "displayName" : "QRcode.png"
   }
 ]
