@@ -6,9 +6,8 @@
           "__content" : [
             {
               "arAnchorSpecification" : {
-                "name" : "image",
-                "physicalWidth" : 0.79706782102584839,
-                "url" : "image:56b96bcf256f6c091bdba9053b994582\/QRcode.png"
+                "alignment" : "horizontal",
+                "name" : "surface"
               },
               "behaviors" : [
                 {
